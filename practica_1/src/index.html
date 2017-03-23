@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Página de inicio</title>
+  </head>
+
+  <body>
+      <form action="php/insertar.php" method="post">
+          <label for="formGroupExampleInput">Inserta texto</label>
+          <input type="text" id="tex" name="tex" placeholder="tex">
+          <button type="submit">Insertar Texto</button>
+      </form>
+
+      <form action="php/muestraResultado.php?action=list" method="get">
+          <button type="submit">Listar textos</button>
+      </form>
+      <form action="php/muestraResultado.php?action=update" method="get">
+          <button type="submit">Actualiza un texto</button>
+      </form>
+      <form action="php/muestraResultado.php?action=delete" method="get">
+          <button type="submit">Elimina un texto</button>
+      </form>
+  </body>
+</html>
