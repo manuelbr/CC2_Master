@@ -60,7 +60,7 @@
                         //Mostramos el resultado de nuestra consulta sobre los elementos de la base de datos
                         echo '<ul>';
                         while($row = $resultado_consulta->fetch_assoc()){
-                          echo '<li>'.$row["texto"]. '<a href="'.'http://localhost/php/muestraResultado.php?actualizar='.$row["id"].'">Actualizar</a> <a href="'.'http://localhost/php/muestraResultado.php?eliminar='.$row["id"].'">Eliminar</a></li>';
+                          echo '<li>'.$row["texto"].' <a href="'.'http://localhost/php/muestraResultado.php?actualizar='.$row["id"].'">Actualizar</a> <a href="'.'http://localhost/php/muestraResultado.php?eliminar='.$row["id"].'">Eliminar</a></li>';
                         }
                         echo '</ul>';
                         echo '<form action="'.'http://localhost/'.'" method="'.'get'.'">
