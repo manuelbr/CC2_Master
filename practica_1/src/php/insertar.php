@@ -3,7 +3,7 @@
         $t = $_POST['tex'];
     }
 
-    $enlace = mysqli_connect("localhost","root","1234","textos");
+    $enlace = mysqli_connect("192.168.10.64","root","1234","textos");
     //Si la conexión a la base de datos ha fallado, que muestre un error:
 
     if ($enlace->connect_errno) {
@@ -29,7 +29,7 @@
           echo "Error insertando en la tabla: " . $enlace->error;
         }
         mysqli_close($enlace);
-        header("Location: http://localhost", true, 301);
+        header("Location: http://docker.ugr.es:15065", true, 301);
         exit();
     }
 ?>
