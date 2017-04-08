@@ -9,15 +9,12 @@
 
 
 
+
 ########################################################################
-##Máquina ubuntu 2: MYSQL
-- Hago sudo apt get update para actualizar los repositorios
-- Instalo mysql-server con sudo apt-get install mysql-server-5.5
-- En ubuntu 14 me encontré el siguiente problema: el binding address encontraba
-problemas al establecerse como 127.0.0.1, por lo que se cambió a 0.0.0.0 para permitir conexiones con cualquier interfaz de red, el cuál era el problema
-- VOlvemos a ejecutar sudo apt-get install mysql-server-5.5
-- Ejecutamos sudo apt-get install mysql-server también le doy la configuración necesaria: contraseña de root y demás.
+## Máquina CENTOS: MYSQL
+- Nos bajamos la imagen de centos7 con mysql que deseamos. En mi caso descargaré la oficial de centos 7 limpia, para poder configurar mysql desde dentro. Esto lo hago con el comando "docker pull jdeathe/centos-ssh-mysql".
+- Arrancamos el contenedor con la imagen que nos hemos bajado con el comando "docker run -i -d -p 15064:3306 --name "mysqlManuelBlanco" --env "MYSQL_ROOT_PASSWORD=contraseñar" jdeathe/centos-ssh-mysql", en el que redirigimos al puerto 3306 las entradas por el puerto 15064 (el que tengo asignado como alumno para mi máquina secundaria) de centos, le damos el nombre a la máquina: "mysqlManuelBlanco" y le especificamos la contraseña que tendrá el usuario root.
+- Pasamos a entrar dentro de la máquina creada con el comando "docker exec -it mysqlManuelBlanco /bin/bash".
+- Comprobamos que el servicio mysql esté corriendo con "service mysqld status".
 - Con el comando mysql -u root -p entramos en la consola de mysql para configurar las tablas que necesitaremos. Metemos contraseña.
 -Introducimos CREATE DATABASE textos; en la shell de mysql, para crear
-- Introducimos GRANT ALL ON *.* to root@'172.17.0.91' IDENTIFIED BY '1234'
-- Introducimos FLUSH PRIVILEGES.
