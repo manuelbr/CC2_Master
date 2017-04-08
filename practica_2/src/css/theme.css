@@ -1,0 +1,38 @@
+body{
+    background-image: url(../images/background.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 17px;
+}
+
+.contenido {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.contenido ul{
+  margin: 0;
+  position: relative;
+}
+
+.contenido form{
+  margin-bottom: 20px;
+}
+
+.contenido form button{
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+h3{
+  margin: 0;
+  position: absolute;
+  margin-top: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
