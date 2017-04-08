@@ -10,19 +10,14 @@
 
 
 ########################################################################
-## Máquina CENTOS: MYSQL
-
-- Nos bajamos la imagen de centos7 con mysql que deseamos. En mi caso descargaré la oficial de centos 7 limpia, para poder configurar mysql desde dentro. Esto lo hago con el comando "docker pull centos".
-- Arrancamos el contenedor con la imagen que nos hemos bajado con el comando "docker run -i -d -p 15064:80 --name "mysqlManuelBlanco" centos", en el que redirigimos al puerto 80 las entradas por el puerto 15064 (el que tengo asignado como alumno para mi máquina secundaria) de centos y le damos el nombre a la máquina: "mysqlManuelBlanco"-
-- Pasamos a entrar dentro de la máquina creada (previamente habiendo encontrado su identificador con docker ps) con el comando "docker exec -i -t e845f6317a13 /bin/bash".
-- Instalamos wget con "yum install wget"
-- hacemos "wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm" para obtener los repositorios de mysql (ya que centos no los proporciona de base).
-- Con "rpm -ivh mysql-community-release-el7-5.noarch.rpm" abrimos el repositorio
-- hacemos yum update
-- sudo yum install mysql-server para bajarlo
-- sudo /sbin/service mysqld start para arrancar el servidor
-- sudo /usr/bin/mysql_secure_installation para configurar mysql, introduciendo la contraseña del root que pone por defecto: ninguna, y metiendo la nueva. También m configuramos los accesos a la base de datos.
-- Abro el puerto 3306 donde espera por defecto mysql con: sudo iptables -I INPUT 5 -i eth0 -p tcp --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
-- reinicio el firewall de centos con sudo service iptables restart.
+##Máquina ubuntu 2: MYSQL
+- Hago sudo apt get update para actualizar los repositorios
+- Instalo mysql-server con sudo apt-get install mysql-server-5.5
+- En ubuntu 14 me encontré el siguiente problema: el binding address encontraba
+problemas al establecerse como 127.0.0.1, por lo que se cambió a 0.0.0.0 para permitir conexiones con cualquier interfaz de red, el cuál era el problema
+- VOlvemos a ejecutar sudo apt-get install mysql-server-5.5
+- Ejecutamos sudo apt-get install mysql-server también le doy la configuración necesaria: contraseña de root y demás.
 - Con el comando mysql -u root -p entramos en la consola de mysql para configurar las tablas que necesitaremos. Metemos contraseña.
 -Introducimos CREATE DATABASE textos; en la shell de mysql, para crear
+- Introducimos GRANT ALL ON *.* to root@'172.17.0.91' IDENTIFIED BY '1234'
+- Introducimos FLUSH PRIVILEGES.
