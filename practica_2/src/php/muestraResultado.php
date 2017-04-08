@@ -46,7 +46,7 @@
                           </form>';
                   }else{
                     echo '<h2>Listado de textos: </h2>';
-                    $enlace = new mysqli("http://hadoop.ugr.es:15064","root","1234","textos");
+                    $enlace = new mysqli("172.17.0.138","root","1234","textos");
                     //Si la conexión a la base de datos ha fallado, que muestre un error:
                     if($enlace->connect_errno) {
                       echo "Fallo al contenctar a MySQL: (" . $enlace->connect_errno . ")";

@@ -3,7 +3,7 @@
         $t = $_POST['tex'];
     }
 
-    $enlace = mysqli_connect("http://hadoop.ugr.es:15064","root","1234","textos");
+    $enlace = mysqli_connect("172.17.0.138","root","1234","textos");
     //Si la conexión a la base de datos ha fallado, que muestre un error:
 
     if ($enlace->connect_errno) {
