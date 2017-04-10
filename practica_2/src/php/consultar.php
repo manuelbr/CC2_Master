@@ -2,7 +2,7 @@
 
 function consulta($query){
   $resultado = "mal";
-  $enlace = new mysqli("172.17.0.138","root","1234","textos");
+  $enlace = new mysqli("172.17.1.51","root","1234","textos");
   //Si la conexión a la base de datos ha fallado, que muestre un error:
   if($enlace->connect_errno) {
       echo "Fallo al conectar a MySQL: (" . $enlace->connect_errno . ")";

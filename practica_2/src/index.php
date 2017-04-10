@@ -15,12 +15,12 @@
         <?php
           if(isset($_GET['inserta'])){
             echo '<h2>Inserta el elemento</h2>
-                  <form action="'.'http://hadoop.ugr.es:15065/php/insertar.php'.'" method="'.'post'.'">
+                  <form action="'.'http://hadoop.ugr.es:14010/php/insertar.php'.'" method="'.'post'.'">
                       <input type="'.'text'.'" id="'.'tex'.'" name="'.'tex'.'" placeholder="'.'tex'.'">
                       <button type="'.'submit'.'">Insertar texto</button>
                   </form>';
           }else{
-            echo '<form action="'.'http://hadoop.ugr.es:15065/?inserta=si'.'" method="'.'post'.'">
+            echo '<form action="'.'http://hadoop.ugr.es:14010/?inserta=si'.'" method="'.'post'.'">
                     <button type="'.'submit'.'">Insertar texto</button>
                   </form>
 
