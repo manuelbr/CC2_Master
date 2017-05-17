@@ -49,7 +49,7 @@ El resultado obtenido ha sido el siguiente:
 1	-1.282261707288373
 ```
 
-## Cálculo del máximo, mínimo y media de todas las columnas del conjunto de datos
+## Cálculo del máximo, mínimo y media de todas las columnas del conjunto
 
 Para lograr ésto, se ha modificado el código del mapeador y del reductor del algoritmo original. En el mapper se ha parametrizado el valor de las columnas, de cara a poder iterar sobre ellas y calcular los estadísticos sobre toda la colección.
 
@@ -141,3 +141,38 @@ Total time spent by all map tasks (ms)=55112
 Total time spent by all reduce tasks (ms)=63392
 ```
 Por ello, vemos que el tiempo dedicado a las tareas de reducción se vé decrementado de forma correspondiente, aunque no de forma significativa.
+
+## ¿Se trata de un conjunto balanceado?
+
+Para que el conjunto fuera balanceado debería de haber un ratio inferior a 1,5 en cuanto a diversidad de clases. Es decir, la relación de aparición de las clases debería ser parecida a un elemento de cada clase (aproximadamente). Para lograr esto, hay que modificar el algoritmo de reducción de los ejercicios anteriores para que sea calculado el número de apariciones de la clase cero y la clase uno, para después obtener el ratio que las relaciona a ambas. Añado una función al código donde se resume esta funcionalidad.
+
+```
+public double calculaRatio(Iterator<DoubleWritable> values){
+                int num0 = 0;
+                int num1 = 0;
+                double actual;
+                double resultado;
+
+                while(values.hasNext()){
+                        actual = values.next().get();
+                        if(actual == 0.0){
+                                num0++;
+                        }else
+                             	if(actual == 1.0){
+                                        num1++;
+                                }
+                }
+
+                if(num1 >= num0)
+                        resultado = (num1+0.0)/(num0+0.0);
+                else
+                    	resultado = (num0+0.0)/(num1+0.0);
+
+                return resultado;
+}
+```
+El resultado que obtengo es el siguiente, lo cual evidencia que el conjunto es no balanceado claramente, de forma muy marcada.
+
+```
+Ratio	58.582560602010815
+```
