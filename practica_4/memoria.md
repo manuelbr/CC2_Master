@@ -176,3 +176,96 @@ El resultado que obtengo es el siguiente, lo cual evidencia que el conjunto es n
 ```
 Ratio	58.582560602010815
 ```
+
+## Coeficiente de correlación
+
+
+```
+public double calculaCorrelacion(Iterator<Text> values){
+                String valor;
+                String[] pareja;
+                double num1,num2;
+                double media1 = 0;
+                double media2 = 0;
+                double acu1 = 0;
+                double acu2 = 0;
+                double acu3 = 0;
+                int numItems = 0;
+
+                while(values.hasNext()){
+                        valor = values.next().toString();
+                        System.out.println(valor);
+                        pareja = valor.split(" ");
+                        num1 = Double.parseDouble(pareja[0]);
+                        num2 = Double.parseDouble(pareja[1]);
+
+                        media1 += num1;
+                        media2 += num2;
+                        acu1 += num1*num2;
+                        acu2 += Math.pow(num1,2);
+                        acu3 += Math.pow(num2,2);
+
+                        numItems++;
+                }
+
+                media1 = media1/numItems;
+                media2 = media2/numItems;
+                double covar = (acu1/numItems)-media1*media2;
+                double desv1 = Math.sqrt((acu2/numItems)-Math.pow(media1,2));
+                double desv2 = Math.sqrt((acu3/numItems)-Math.pow(media2,2));
+
+                return (covar/(desv1*desv2));
+}
+
+public void reduce(Text key, Iterator<Text> values, OutputCollector<Text, DoubleWritable> output, Reporter reporter) throws IOException {
+                double resultado = calculaCorrelacion(values);
+                output.collect(key, new DoubleWritable(resultado));
+}
+```
+
+```
+3 y 8	0.016130402799924542
+4 y 7	0.01984291578033614
+5 y 6	0.03200113594875155
+3 y 9	0.01817123896585364
+4 y 8	0.01224584385595619
+5 y 7	0.03297998768398484
+4 y 9	0.014041854998880898
+5 y 8	0.015183324110128226
+6 y 7	0.11488805268078417
+5 y 9	0.023068393377281653
+6 y 8	0.07783431570283235
+6 y 9	0.1071360896407867
+7 y 8	-0.3292179447994215
+7 y 9	0.08936167755929571
+0 y 1	-0.13589916862619886
+8 y 9	0.1084960047958963
+0 y 2	0.09143593108544017
+0 y 3	0.07005931834468403
+1 y 2	-0.003036453945878444
+0 y 4	0.04742917823775334
+1 y 3	0.009438349438435465
+0 y 5	0.12916572713949537
+1 y 4	0.05885670185754341
+2 y 3	-0.01726247486762999
+0 y 6	0.19252517587745802
+1 y 5	0.014659977638068512
+2 y 4	0.018191261366109063
+0 y 7	0.1792126656558994
+1 y 6	-0.031832553319748075
+2 y 5	0.024182999250758484
+3 y 4	0.015754379166559307
+0 y 8	0.06624560106081653
+1 y 7	-1.7503659083517436E-5
+2 y 6	0.041153841377462724
+3 y 5	0.016128930425374947
+0 y 9	0.13827089964163103
+1 y 8	0.01589410348968727
+2 y 7	0.03814283037771738
+3 y 6	0.025952003813569456
+4 y 5	0.07125079800784533
+1 y 9	-0.01673062344568349
+2 y 8	0.025077384911599235
+3 y 7	0.01879122854336587
+4 y 6	0.018264386288745375
+```
